@@ -77,4 +77,4 @@ client.on('message', message =>{
 
 
 
-client.login('NzYxODQxMDE4ODgxNTcyODc0.X3gdvQ.DPFswfXpduwRDxA7Em0JmH5Woao');
+client.login('Your Token Here');
