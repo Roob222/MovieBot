@@ -1,0 +1,14 @@
+{
+  "name": "moviebot",
+  "version": "1.0.0",
+  "description": "Pulls basic information about the weekly film in the Brain Blast server amongst other things",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Roob",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.3.1"
+  }
+}
