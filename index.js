@@ -15,16 +15,32 @@ for(const file of commandFiles){
   client.commands.set(command.name, command);
 }
 
+const config = require('./config/conf.json');
+
+
+var mysql = require('mysql');
+var con = mysql.createConnection({
+  database: "Movies",
+  host: "localhost",
+  user: "root",
+  password: config.pass
+});
+
+
+
 const helpEmbed = new Discord.MessageEmbed()
     .setColor('#0099ff')
     .setTitle('Help')
     .setDescription('This is a list of my available commands')
     .addFields(
+      { name: 'movie', value: 'I will send the current movie of the week'},
       { name: 'ping', value: 'Tests to see if I am awake'},
       { name: 'coinflip', value: 'I will flip a coin'},
       { name: 'meme', value: 'I will send a random meme'},
       { name: 'based', value: 'I will say some based shit'},
       { name: 'inbound', value: 'ENEMY AC-130 ABOVE!'},
+      { name: 'uhoh', value: 'Uh Oh Stinky'},
+      
       { name: 'help', value: 'I will list any commands I can perform'},
       
     )
@@ -39,8 +55,22 @@ client.once('ready', () => {
 client.on('message', message =>{
   if(!message.content.startsWith(prefix) || message.author.bot) return;
 
+  var subcommand;
+  try{
+    subcommand = message.content.slice(prefix.length).match(/\[(.*?)\]/)[0].toString().replace(/[\[\]']+/g, "");
+  }
+  catch(error){
+    console.log("rip");
+  }
+ 
   const args = message.content.slice(prefix.length).split(/ +/);
+  
   const command = args.shift().toLowerCase();
+
+  
+
+
+
 
   if(command === 'ping'){
     message.channel.send('pong!');
@@ -69,12 +99,21 @@ client.on('message', message =>{
     
     message.channel.send(based);
   }
+  else if(command === 'movie'){
+    
+    client.commands.get('movie').execute(message, args, con, subcommand);
+  }
   else if(command === 'inbound'){
     message.channel.send({files: ['sounds/ac130.mp3']});
   }
-
+  else if(command === 'uhoh'){
+    message.channel.send({files: ['sounds/uhoh.mp3']});
+  }
+  else if(command === 'idrive'){
+    message.channel.send("...I drive");
+  }
 });
 
 
 
-client.login('kq_TOwJfaOiMJnDfSpuO1T4pOPdDKMpI');
+client.login(config.token);
