@@ -32,25 +32,33 @@ module.exports = {
  
     function getMovieValues(){
 
+      if(!Date.parse(subcommand) || !subcommand){
+        subcommand = "CURDATE()";
+      }
+      else{
+        subcommand = "'" + subcommand + "'";
+      }
+
+
        setTimeout(function(){
-      con.query(`SELECT title FROM Weekly_Films where WEEK(watchWeek) = WEEK(CURDATE())`, function(err,result){
+      con.query(`SELECT title FROM Weekly_Films where WEEK(watchWeek) = WEEK(${subcommand})`, function(err,result){
        if(err) throw err;
         title =  result[0].title;
       
      });
      
-     con.query(`SELECT director FROM Weekly_Films where WEEK(watchWeek) = WEEK(CURDATE())`, function(err,result){
+     con.query(`SELECT director FROM Weekly_Films where WEEK(watchWeek) = WEEK(${subcommand})`, function(err,result){
        if(err) throw err;
        director =  result[0].director;
        
      });
    
-     con.query(`SELECT writer FROM Weekly_Films where WEEK(watchWeek) = WEEK(CURDATE())`, function(err,result){
+     con.query(`SELECT writer FROM Weekly_Films where WEEK(watchWeek) = WEEK(${subcommand})`, function(err,result){
        if(err) throw err;
        writer =  result[0].writer;
      });
    
-     con.query(`SELECT reubenScore FROM Weekly_Films where WEEK(watchWeek) = WEEK(CURDATE())`, function(err,result){
+     con.query(`SELECT reubenScore FROM Weekly_Films where WEEK(watchWeek) = WEEK(${subcommand})`, function(err,result){
        if(err) throw err;
        if( result[0].reubenScore){
          reubenScore =  result[0].reubenScore;
@@ -60,7 +68,7 @@ module.exports = {
        
      });
    
-     con.query(`SELECT oliverScore FROM Weekly_Films where WEEK(watchWeek) = WEEK(CURDATE())`, function(err,result){
+     con.query(`SELECT oliverScore FROM Weekly_Films where WEEK(watchWeek) = WEEK(${subcommand})`, function(err,result){
        if(err) throw err;
        if( result[0].oliverScore){
          oliverScore = result[0].oliverScore;
@@ -70,7 +78,7 @@ module.exports = {
        
      });
    
-     con.query(`SELECT ryanScore FROM Weekly_Films where WEEK(watchWeek) = WEEK(CURDATE())`, function(err,result){
+     con.query(`SELECT ryanScore FROM Weekly_Films where WEEK(watchWeek) = WEEK(${subcommand})`, function(err,result){
        if(err) throw err;
        if( result[0].ryanScore){
          ryanScore =  result[0].ryanScore;

@@ -35,10 +35,12 @@ const helpEmbed = new Discord.MessageEmbed()
     .addFields(
       { name: 'movie', value: 'I will send the current movie of the week'},
       { name: 'ping', value: 'Tests to see if I am awake'},
+      { name: 'ip', value: 'I will read the IP and location of online server members'},
       { name: 'coinflip', value: 'I will flip a coin'},
       { name: 'meme', value: 'I will send a random meme'},
       { name: 'based', value: 'I will say some based shit'},
       { name: 'inbound', value: 'ENEMY AC-130 ABOVE!'},
+      { name: 'yoda', value: 'wtf'},
       { name: 'uhoh', value: 'Uh Oh Stinky'},
       
       { name: 'help', value: 'I will list any commands I can perform'},
@@ -56,6 +58,7 @@ client.on('message', message =>{
   if(!message.content.startsWith(prefix) || message.author.bot) return;
 
   var subcommand;
+  
   try{
     subcommand = message.content.slice(prefix.length).match(/\[(.*?)\]/)[0].toString().replace(/[\[\]']+/g, "");
   }
@@ -108,6 +111,12 @@ client.on('message', message =>{
   }
   else if(command === 'uhoh'){
     message.channel.send({files: ['sounds/uhoh.mp3']});
+  }
+  else if(command === 'yoda'){
+    message.channel.send({files: ['sounds/yoda.mp3']});
+  }
+  else if(command === 'ip'){
+    message.channel.send({files: ['sounds/important.mp3']});
   }
   else if(command === 'idrive'){
     message.channel.send("...I drive");
