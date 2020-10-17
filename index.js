@@ -31,9 +31,9 @@ var con = mysql.createConnection({
 const helpEmbed = new Discord.MessageEmbed()
     .setColor('#0099ff')
     .setTitle('Help')
-    .setDescription('This is a list of my available commands')
+    .setDescription('This is a list of my available commands. Subcommands go in square brackets [] following the command where applicable.')
     .addFields(
-      { name: 'movie', value: 'I will send the current movie of the week'},
+      { name: 'movie', value: 'I will send the current movie of the week. Type [YYYY-MM-DD] following the command to see the movie of that week.'},
       { name: 'ping', value: 'Tests to see if I am awake'},
       { name: 'ip', value: 'I will read the IP and location of online server members'},
       { name: 'coinflip', value: 'I will flip a coin'},
@@ -58,7 +58,7 @@ client.on('message', message =>{
   if(!message.content.startsWith(prefix) || message.author.bot) return;
 
   var subcommand;
-  
+
   try{
     subcommand = message.content.slice(prefix.length).match(/\[(.*?)\]/)[0].toString().replace(/[\[\]']+/g, "");
   }
