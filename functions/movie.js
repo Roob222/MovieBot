@@ -1,8 +1,8 @@
 /*
 TODO
 1. Alter timeout function. Hacky workaround, can be done better.
-2. Request specific movie attribute function. Subcommand is read in []. Do something with it
-3. Get better coffee. Current brand is kinda shit.
+2. Cannot read SQL error type from here. idk how to fix. google?
+3. Better coffee acquired
 */
 
 
@@ -40,7 +40,7 @@ module.exports = {
 
       if(!Date.parse(subcommand) || !subcommand || !/\d{4}-\d{2}-\d{2}/.test(subcommand)){
         subcommand = "CURDATE()";
-        console.log(/^\d{4}-\d{2}-\d{2}/.test(subcommand));
+       
       }
       else{
         subcommand = "'" + subcommand + "'";
@@ -49,7 +49,7 @@ module.exports = {
 
       con.query(`SELECT title FROM Weekly_Films where WEEK(watchWeek) = WEEK(${subcommand})`, function(err,result){
        if(err) throw error;
-
+        
        try{
         title =  result[0].title;
        }
@@ -160,7 +160,7 @@ getMovieValues();
 
 console.log(subcommand);
 
-//CHANGE THIS HOLY SHIT
+//functional for the time being change it later
 setTimeout(function(){
 
   console.log(title,director);

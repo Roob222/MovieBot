@@ -19,6 +19,7 @@ const config = require('./config/conf.json');
 
 
 var mysql = require('mysql');
+
 var con = mysql.createConnection({
   database: "Movies",
   host: "localhost",
@@ -77,7 +78,6 @@ client.on('message', message =>{
 
   if(command === 'ping'){
     message.channel.send('pong!');
-
   }
   else if(command === 'coinflip'){
     client.commands.get('coinflip').execute(message,args);
@@ -93,7 +93,6 @@ client.on('message', message =>{
   else if(command === 'based'){
     var based = "based ";
     var rand = Math.floor(Math.random() * 100) + 1;
-    console.log(rand);
     for(var i = 0; i <= rand; i++){
       based = based.concat("based ");
       console.log(i);
@@ -121,8 +120,10 @@ client.on('message', message =>{
   else if(command === 'idrive'){
     message.channel.send("...I drive");
   }
+  else if(command === 'lad'){
+    client.commands.get('lads').execute(message,args);
+  }
 });
-
 
 
 client.login(config.token);
